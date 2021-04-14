@@ -1,7 +1,5 @@
-import { amortize } from "../../src/amortize";
+import { amortize } from '../../src/amortize';
 
-describe("Hello", () => {
-	it("World", () => {
-		amortize();
-	});
+describe('Hello', () => {
+  it('World', () => {});
 });
