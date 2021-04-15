@@ -5,13 +5,15 @@ import toFixed from './utils/to-fixed';
 
 export default class Calculator {
   static calculate(loan: Loan): void {
-    // loan.total = this.calculatePaymentTotal(loan);
     loan.payments = this.calculatePayments(loan);
+    loan.total = this.calculatePaymentTotal(loan);
   }
 
-  // static calculatePaymentTotal(loan: Loan): PaymentTotal {
-  //   return new PaymentTotal();
-  // }
+  static calculatePaymentTotal(loan: Loan): PaymentTotal {
+    const principle = loan.amount - loan.downPayment;
+
+    return new PaymentTotal(-1, principle, -1, new Date());
+  }
 
   static calculatePayments(loan: Loan): Payment[] {
     const result: Payment[] = [];
