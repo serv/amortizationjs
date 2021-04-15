@@ -21,6 +21,11 @@ export default class Calculator {
     return result;
   }
 
+  static interestPaymentPerPeriod(loan: Loan, principle: number) {
+    const amount = principle * (loan.interest / loan.paymentsPerYear / 100);
+    return this.toFixed(amount, 2);
+  }
+
   static ratePerPeriod(interestRate: number, paymentsPerYear: number): number {
     return interestRate / paymentsPerYear / 100;
   }
@@ -31,13 +36,6 @@ export default class Calculator {
     years: number
   ): number {
     return Math.pow(1 + ratePerPeriod, paymentsPerYear * years);
-  }
-
-  static interestPaymentPerPeriod(
-    currentPrinciple: number,
-    monthlyRate: number
-  ): number {
-    return this.toFixed(currentPrinciple * monthlyRate, 2);
   }
 
   static totalPaymentPerPeriod(loan: Loan): number {
