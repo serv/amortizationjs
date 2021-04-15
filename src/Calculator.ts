@@ -1,11 +1,12 @@
 import Loan from './models/Loan';
 import PaymentTotal from './models/PaymentTotal';
 import Payment from './models/Payment';
+import toFixed from './utils/to-fixed';
 
 export default class Calculator {
   static calculate(loan: Loan): void {
     // loan.total = this.calculatePaymentTotal(loan);
-    // loan.payments = this.calculatePayments(loan);
+    loan.payments = this.calculatePayments(loan);
   }
 
   // static calculatePaymentTotal(loan: Loan): PaymentTotal {
@@ -16,33 +17,40 @@ export default class Calculator {
     const result: Payment[] = [];
     let currentPrinciple = loan.amount - loan.downPayment;
     const totalPaymentPerPeriod = this.totalPaymentPerPeriod(loan);
+    let interestCumulative: number = 0;
 
     for (let i = 0; i < loan.years * loan.paymentsPerYear; i++) {
       const interestPaymentPerPeriod = this.interestPaymentPerPeriod(
         loan,
         currentPrinciple
       );
+      interestCumulative += interestPaymentPerPeriod;
+      interestCumulative = toFixed(interestCumulative, 2);
       const principlePaid = totalPaymentPerPeriod - interestPaymentPerPeriod;
       currentPrinciple -= principlePaid;
+      currentPrinciple = toFixed(currentPrinciple, 2);
 
       const payment = new Payment(
         i + 1,
+        totalPaymentPerPeriod,
         principlePaid,
         interestPaymentPerPeriod,
         currentPrinciple,
-        -1,
-        -1,
-        -1
+        interestCumulative
       );
+
       result.push(payment);
     }
+
+    const lastPayment = result[result.length - 1];
+    lastPayment.rebalance();
 
     return result;
   }
 
   static interestPaymentPerPeriod(loan: Loan, principle: number) {
     const amount = principle * (loan.interest / loan.paymentsPerYear / 100);
-    return this.toFixed(amount, 2);
+    return toFixed(amount, 2);
   }
 
   static ratePerPeriod(interestRate: number, paymentsPerYear: number): number {
@@ -66,13 +74,6 @@ export default class Calculator {
       loan.years
     );
 
-    return this.toFixed(
-      (loanAmount * (rate * multiplier)) / (multiplier - 1),
-      2
-    );
-  }
-
-  static toFixed(amount: number, digits: number): number {
-    return parseFloat(amount.toFixed(digits));
+    return toFixed((loanAmount * (rate * multiplier)) / (multiplier - 1), 2);
   }
 }
