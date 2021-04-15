@@ -14,9 +14,28 @@ export default class Calculator {
 
   static calculatePayments(loan: Loan): Payment[] {
     const result: Payment[] = [];
-    let last;
+    let currentPrinciple = loan.amount - loan.downPayment;
+    const totalPaymentPerPeriod = this.totalPaymentPerPeriod(loan);
 
-    for (let i = 0; i < loan.years * loan.paymentsPerYear; i++) {}
+    for (let i = 0; i < loan.years * loan.paymentsPerYear; i++) {
+      const interestPaymentPerPeriod = this.interestPaymentPerPeriod(
+        loan,
+        currentPrinciple
+      );
+      const principlePaid = totalPaymentPerPeriod - interestPaymentPerPeriod;
+      currentPrinciple -= principlePaid;
+
+      const payment = new Payment(
+        i + 1,
+        principlePaid,
+        interestPaymentPerPeriod,
+        currentPrinciple,
+        -1,
+        -1,
+        -1
+      );
+      result.push(payment);
+    }
 
     return result;
   }
