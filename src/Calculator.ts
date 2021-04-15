@@ -11,8 +11,19 @@ export default class Calculator {
 
   static calculatePaymentTotal(loan: Loan): PaymentTotal {
     const principle = loan.amount - loan.downPayment;
+    const total = Calculator.calculateTotal(loan);
+    const interest = total - principle;
 
-    return new PaymentTotal(-1, principle, -1, new Date());
+    return new PaymentTotal(interest, principle, total, new Date());
+  }
+  static calculateTotal(loan: Loan) {
+    let sum = 0;
+
+    for (let payment of loan.payments) {
+      sum += payment.totalPayment;
+    }
+
+    return toFixed(sum, 2);
   }
 
   static calculatePayments(loan: Loan): Payment[] {

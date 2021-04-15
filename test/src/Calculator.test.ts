@@ -17,6 +17,15 @@ describe('Calculator', () => {
     });
   });
 
+  describe('.calculatePaymentTotal', () => {
+    it('200000, 50000, 5.375, 30', () => {
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
+      loan.payments = Calculator.calculatePayments(loan);
+
+      const paymentTotal = Calculator.calculatePaymentTotal(loan);
+    });
+  });
+
   describe('.totalPaymentPerPeriod', () => {
     it('200000, 50000, 5.375, 30', () => {
       const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
