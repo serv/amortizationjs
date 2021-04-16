@@ -1,1 +1,3 @@
-export { amortize } from "./src/amortize";
+import { amortize } from './src/amortize';
+
+export default amortize;
