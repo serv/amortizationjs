@@ -14,8 +14,9 @@ export default class Calculator {
     const total = Calculator.calculateTotal(loan);
     const interest = total - principle;
 
-    return new PaymentTotal(interest, principle, total, new Date());
+    return new PaymentTotal(interest, principle, total);
   }
+
   static calculateTotal(loan: Loan) {
     let sum = 0;
 

@@ -8,7 +8,6 @@ export default class Loan {
   interest: number;
   years: number;
   paymentsPerYear: number;
-  startDate: Date;
   total: PaymentTotal;
   payments: Payment[];
 
@@ -17,16 +16,14 @@ export default class Loan {
     downPayment: number,
     interest: number,
     years: number,
-    paymentsPerYear: number,
-    startDate: Date
+    paymentsPerYear: number
   ) {
     this.amount = amount;
     this.downPayment = downPayment;
     this.interest = interest;
     this.years = years;
     this.paymentsPerYear = paymentsPerYear;
-    this.startDate = startDate;
-    this.total = new PaymentTotal(0, 0, 0, new Date());
+    this.total = new PaymentTotal(0, 0, 0);
     this.payments = [];
   }
 

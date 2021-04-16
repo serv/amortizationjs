@@ -5,7 +5,7 @@ import Loan from '../../src/models/Loan';
 describe('Calculator', () => {
   describe('.calculatePayments', () => {
     it('200000, 50000, 5.375, 30', () => {
-      const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12);
       const payments = Calculator.calculatePayments(loan);
 
       expect(payments.length).to.eql(12 * 30);
@@ -19,7 +19,7 @@ describe('Calculator', () => {
 
   describe('.calculatePaymentTotal', () => {
     it('200000, 50000, 5.375, 30', () => {
-      const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12);
       loan.payments = Calculator.calculatePayments(loan);
 
       const paymentTotal = Calculator.calculatePaymentTotal(loan);
@@ -28,7 +28,7 @@ describe('Calculator', () => {
 
   describe('.totalPaymentPerPeriod', () => {
     it('200000, 50000, 5.375, 30', () => {
-      const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12);
       const paymentPerPeriod = Calculator.totalPaymentPerPeriod(loan);
 
       expect(paymentPerPeriod).to.eql(839.96);
@@ -37,7 +37,7 @@ describe('Calculator', () => {
 
   describe('.interestPaymentPerPeriod', () => {
     it('200000, 50000, 5.375, 30', () => {
-      const loan = new Loan(200_000, 50_000, 5.375, 30, 12, new Date());
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12);
       const interestPerPeriod = Calculator.interestPaymentPerPeriod(
         loan,
         200_000 - 50_000
