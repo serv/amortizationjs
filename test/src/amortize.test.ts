@@ -1,5 +1,7 @@
 import { amortize } from '../../src/amortize';
 
-describe('Hello', () => {
-  it('World', () => {});
+describe('amortize', () => {
+  it('success', () => {
+    const loan = amortize(200_000, 50_000, 5.375, 30, 12);
+  });
 });
