@@ -1,4 +1,4 @@
-import { amortize } from '../../src/amortize';
+import amortize from '../../src';
 
 describe('amortize', () => {
   it('success', () => {

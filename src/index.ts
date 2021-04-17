@@ -1,12 +1,12 @@
 import Loan from './models/Loan';
 
-function amortize(
+export default function amortize(
   amount: number,
   downPayment: number,
   interest: number,
   years: number,
   paymentsPerYear: number
-) {
+): Loan {
   const loan: Loan = new Loan(
     amount,
     downPayment,
@@ -17,5 +17,3 @@ function amortize(
   loan.calculate();
   return loan;
 }
-
-export { amortize };
