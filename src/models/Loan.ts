@@ -22,7 +22,7 @@ export default class Loan {
   ) {
     this.amount = amount;
     this.downPayment = downPayment;
-    this.downPaymentRatio = calculateDownPaymentRatio(amount, downPayment);
+    this.downPaymentRatio = this.calculateDownPaymentRatio(amount, downPayment);
     this.interest = interest;
     this.years = years;
     this.paymentsPerYear = paymentsPerYear;
@@ -30,18 +30,15 @@ export default class Loan {
     this.payments = [];
   }
 
+  calculateDownPaymentRatio(amount: number, downPayment: number): number {
+    if (amount === 0 || downPayment === 0) {
+      return 0;
+    }
+
+    return toFixed(downPayment / amount, 4);
+  }
+
   calculate() {
     Calculator.calculate(this);
   }
-}
-
-function calculateDownPaymentRatio(
-  amount: number,
-  downPayment: number
-): number {
-  if (amount === 0 || downPayment === 0) {
-    return 0;
-  }
-
-  return toFixed(downPayment / amount, 4);
 }
