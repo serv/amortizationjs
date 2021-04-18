@@ -1,10 +1,12 @@
 import PaymentTotal from './PaymentTotal';
 import Payment from './Payment';
 import Calculator from '../Calculator';
+import toFixed from '../utils/to-fixed';
 
 export default class Loan {
   amount: number;
   downPayment: number;
+  downPaymentRatio: number;
   interest: number;
   years: number;
   paymentsPerYear: number;
@@ -20,6 +22,7 @@ export default class Loan {
   ) {
     this.amount = amount;
     this.downPayment = downPayment;
+    this.downPaymentRatio = calculateDownPaymentRatio(amount, downPayment);
     this.interest = interest;
     this.years = years;
     this.paymentsPerYear = paymentsPerYear;
@@ -30,4 +33,15 @@ export default class Loan {
   calculate() {
     Calculator.calculate(this);
   }
+}
+
+function calculateDownPaymentRatio(
+  amount: number,
+  downPayment: number
+): number {
+  if (amount === 0 || downPayment === 0) {
+    return 0;
+  }
+
+  return toFixed(downPayment / amount, 4);
 }
