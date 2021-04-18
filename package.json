@@ -1,6 +1,6 @@
 {
   "name": "amortizationjs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Loan or mortgage amortization calculator",
   "main": "dist/index.js",
   "scripts": {
