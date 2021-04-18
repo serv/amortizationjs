@@ -1,7 +1,7 @@
 {
   "name": "amortizationjs",
   "version": "0.0.1",
-  "description": "",
+  "description": "Loan or mortgage amortization calculator",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,6 +9,16 @@
     "test": "mocha -r ts-node/register test/**/*.test.ts"
   },
   "author": "Jason Kim",
+  "keywords": [
+    "amortization",
+    "amortize",
+    "loan",
+    "mortgage"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serv/amortizationjs"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.16",
