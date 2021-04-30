@@ -7,6 +7,21 @@ export default class Calculator {
   static calculate(loan: Loan): void {
     loan.payments = this.calculatePayments(loan);
     loan.total = this.calculatePaymentTotal(loan);
+    loan.monthlyPayment = this.getMonthlyPayment(loan.payments);
+  }
+
+  static getMonthlyPayment(payments: Payment[]): number {
+    if (payments.length < 1) {
+      throw new Error('payments are empty');
+    }
+
+    const firstEl = payments[0];
+
+    if (firstEl.totalPayment === undefined || firstEl.totalPayment === null) {
+      throw new Error('invalid payment object');
+    }
+
+    return firstEl.totalPayment;
   }
 
   static calculatePaymentTotal(loan: Loan): PaymentTotal {

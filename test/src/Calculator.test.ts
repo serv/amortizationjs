@@ -26,6 +26,17 @@ describe('Calculator', () => {
     });
   });
 
+  describe('.getMonthlyPayment', () => {
+    it('get monthlyPayment after calculating payments', () => {
+      const loan = new Loan(200_000, 50_000, 5.375, 30, 12);
+      loan.payments = Calculator.calculatePayments(loan);
+
+      const monthlyPayment = Calculator.getMonthlyPayment(loan.payments);
+
+      expect(monthlyPayment).to.eql(839.96);
+    });
+  });
+
   describe('.totalPaymentPerPeriod', () => {
     it('200000, 50000, 5.375, 30', () => {
       const loan = new Loan(200_000, 50_000, 5.375, 30, 12);

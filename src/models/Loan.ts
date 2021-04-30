@@ -12,6 +12,7 @@ export default class Loan {
   paymentsPerYear: number;
   total: PaymentTotal;
   payments: Payment[];
+  monthlyPayment: number;
 
   constructor(
     amount: number,
@@ -28,6 +29,7 @@ export default class Loan {
     this.paymentsPerYear = paymentsPerYear;
     this.total = new PaymentTotal(0, 0, 0);
     this.payments = [];
+    this.monthlyPayment = 0;
   }
 
   calculateDownPaymentRatio(amount: number, downPayment: number): number {
