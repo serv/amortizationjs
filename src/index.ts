@@ -1,3 +1,4 @@
+import Calculator from './Calculator';
 import Loan from './models/Loan';
 
 export default function amortize(
@@ -17,3 +18,19 @@ export default function amortize(
   loan.calculate();
   return loan;
 }
+
+function calculatePrinciple(
+  monthlyPayment: number,
+  interest: number,
+  years: number,
+  paymentsPerYear: number
+): number {
+  return Calculator.calculatePrinciple(
+    monthlyPayment,
+    interest,
+    years,
+    paymentsPerYear
+  );
+}
+
+export { amortize, calculatePrinciple as calculatePrinciple };

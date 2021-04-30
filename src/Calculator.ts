@@ -105,4 +105,19 @@ export default class Calculator {
 
     return toFixed((loanAmount * (rate * multiplier)) / (multiplier - 1), 2);
   }
+
+  static calculatePrinciple(
+    monthlyPayment: number,
+    interest: number,
+    years: number,
+    paymentsPerYear: number
+  ): number {
+    // M = P[r(1+r)^n/((1+r)^n)-1)]
+
+    const n: number = years * paymentsPerYear;
+    const r: number = interest / 100 / paymentsPerYear;
+    const powerI: number = Math.pow(1 + r, n);
+
+    return toFixed((monthlyPayment * (powerI - 1)) / (r * powerI), 2);
+  }
 }

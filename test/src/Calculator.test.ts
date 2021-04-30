@@ -77,4 +77,12 @@ describe('Calculator', () => {
       console.log(multiplier);
     });
   });
+
+  describe('.calculatePrinciple', () => {
+    it('using 839.96 as the monthly payment', function () {
+      const actual = Calculator.calculatePrinciple(839.96, 5.375, 30, 12);
+
+      expect(200_000 - 50_000 - actual).to.lessThan(1);
+    });
+  });
 });
